@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: stockflow-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /api/health
+    disk:
+      name: stockflow-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: ENV
+        value: production
+      - key: FRONTEND_URL
+        sync: false
+      - key: DATABASE_PATH
+        value: /var/data/stockflow.db
