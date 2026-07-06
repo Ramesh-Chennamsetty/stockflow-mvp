@@ -184,6 +184,13 @@ class Handler(BaseHTTPRequestHandler):
             })
         if path == "/api/health":
             return self.send_json(200, {"status": "OK"})
+        if path == "/api":
+            return self.send_json(200, {
+                "service": "StockFlow API",
+                "status": "OK",
+                "message": "Welcome to StockFlow API",
+                "health": "/api/health"
+            })
         if path == "/api/session":
             user = self.session()
             return self.send_json(200, self.state(user) if user else {"user": None})
